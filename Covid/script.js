@@ -1,50 +1,68 @@
-window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
 
-    const input = document.querySelector('#input')
+        const input = document.querySelector('#input')
 
-    input.addEventListener('change', () => {
+        //Data from the wolrd
 
-
-
-        fetch(`https://coronavirus-19-api.herokuapp.com/countries/${input.value}`)
+        fetch(`https://coronavirus-19-api.herokuapp.com/countries/world`)
             .then(response => response.json())
             .then((dataParse) => {
-                console.log(dataParse)
-
-
-                const divBox = document.querySelector('#box-country')
+                const boxMundi = document.querySelector('#box-world')
                 const cases = document.createElement('p')
                 const deaths = document.createElement('p');
                 const recovered = document.createElement('p')
-
-
-
                 cases.innerText = `Total confirmados: ${dataParse.cases}`;
-                deaths.innerText = `Número total de mortes: ${dataParse.deaths}`;
-                recovered.innerText = `Número total de recuperados: ${dataParse.recovered}`;
-
-                divBox.appendChild(cases);
-                divBox.appendChild(deaths);
-                divBox.appendChild(recovered);
-
-
-
-
+                deaths.innerText = `Total de mortos: ${dataParse.deaths}`;
+                recovered.innerText = `Total de recuperados: ${dataParse.recovered}`;
+                boxMundi.appendChild(cases);
+                boxMundi.appendChild(deaths);
+                boxMundi.appendChild(recovered);
 
             })
+
+
+        //Data from BRAZIL
+
+        fetch(`https://coronavirus-19-api.herokuapp.com/countries/brazil`)
+            .then(response => response.json())
+            .then((dataParse) => {
+                console.log(dataParse)
+                const boxBr = document.querySelector('#box-brazil')
+                const cases = document.createElement('p')
+                const deaths = document.createElement('p');
+                const recovered = document.createElement('p')
+                cases.innerText = `Total confirmados: ${dataParse.cases}`;
+                deaths.innerText = `Total de mortos: ${dataParse.deaths}`;
+                recovered.innerText = `Total de recuperados: ${dataParse.recovered}`;
+                boxBr.appendChild(cases);
+                boxBr.appendChild(deaths);
+                boxBr.appendChild(recovered);
+            })
+
+
+    input.addEventListener('change', () => {
+    fetch(`https://coronavirus-19-api.herokuapp.com/countries/${input.value}`)
+        .then(response => response.json())
+        .then((dataParse) => {
+
+
+            const divBox = document.querySelector('#box-country')
+            const cases = document.createElement('p')
+            const deaths = document.createElement('p');
+            const recovered = document.createElement('p');
+            
+            cases.innerText = `Total confirmados: ${dataParse.cases}`;
+            deaths.innerText = `Total de mortos: ${dataParse.deaths}`;
+            recovered.innerText = `Total de recuperados: ${dataParse.recovered}`;
+
+            divBox.appendChild(cases);
+            divBox.appendChild(deaths);
+            divBox.appendChild(recovered);
+
+
+
+
+
+        })
     })
-
 })
-
-// {"country":"Brazil",
-// "cases":693419,
-// "todayCases":1457,
-// "deaths":37312,
-// "todayDeaths":813,
-// "recovered":302084,
-// "active":354023,
-// "critical":8318,
-// "casesPerOneMillion":3264,
-// "deathsPerOneMillion":176,
-// "totalTests":999836,
-// "testsPerOneMillion":4706}
